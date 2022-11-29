@@ -1,24 +1,13 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faEdit, faTrash, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { useDispatch } from "react-redux"
-import { edit_comment } from '../reducers/actions';
+
 
 
 
 const Notes = ({ readNote, id }) => {
 
-    const distpatch = useDispatch()
-
     const [viewEditNote, setViewEditNote] = useState(false);
-    const [note, setNote] = useState("");
-    // console.log(note)
-
-    const enviarNotaEditada = (e) => {
-        e.preventDefault()
-
-        distpatch(edit_comment({ id: id, nota: note }))
-    }
 
 
     return (
@@ -33,16 +22,10 @@ const Notes = ({ readNote, id }) => {
                 {viewEditNote ? (
                     <form 
                     className="notes-details d-flex justify-content-between" 
-                    onSubmit={(e)=>{
-                        enviarNotaEditada(e)
-                        setViewEditNote(false)
-                    }}
                     >
                         <input
                             type="text"
                             className="form-control w-100"
-                            onChange={(e) => setNote(e.target.value)}
-                            defaultValue={readNote}
                         />
                         <div className="notes-button d-block d-md-flex align-items-start ">
                             <button
@@ -61,11 +44,10 @@ const Notes = ({ readNote, id }) => {
                     </form>
                 ) : (
                     <div className="notes-details d-flex justify-content-between">
-                        <p>{readNote}</p>
+                        <p>Notas</p>
                         <div className="notes-button d-block d-md-flex align-items-start">
                             <button
                                 className="btn btn-outline-primary ms-2"
-                                onClick={() => setViewEditNote(true)}
                             >
                                 <FontAwesomeIcon icon={faEdit} />
                             </button>
